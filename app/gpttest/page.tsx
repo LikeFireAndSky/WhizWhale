@@ -10,17 +10,17 @@ const InputForm = () => {
     setQuestion(e.target.value);
   };
 
-  
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const res = await axios.post('/api/v1/gpt/generate', {
-        question,
+        userMessage: question,
       });
 
       console.log(res.data.data);
       setResult(res.data.data);
-      setQuestion('');
+      // setQuestion('');
       console.log(result);
 
       if (res.status !== 200) {
