@@ -11,12 +11,11 @@ const InputForm = () => {
 
   const handleSubmit = async () => {
     try {
-      const res = await fetch("/api/generate", {
+      const res = await fetch("/api/v1/gpt/generate", {
         method: "POST",
         body: JSON.stringify({ userMessage: question }),
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer ${process.env.OPENAI_API_KEY}",
         },
       });
 
@@ -27,6 +26,8 @@ const InputForm = () => {
 
       setResult(data.result);
       setQuestion("");
+      console.log(question);
+      console.log(result);
     } catch (err) {
       console.error(err);
       alert(err);

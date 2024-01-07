@@ -1,21 +1,16 @@
-// route.ts
 import { NextApiRequest, NextApiResponse } from "next";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: "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",
 });
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method !== "POST") {
-    return res.status(405).end();
-  }
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  if (req.method !== "POST")
+    return res.status(405).json({
+      message: "Method Not Allowed",
+    });
 
   const { userMessage } = req.body;
-
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
@@ -24,7 +19,7 @@ export default async function handler(
         { role: "user", content: userMessage || "Hello, GPT!" },
       ],
       temperature: 0.5,
-      max_tokens: 64,
+      max_tokens: 1024,
       top_p: 1,
     });
 
@@ -33,4 +28,6 @@ export default async function handler(
     console.error(err);
     res.status(500).json({ error: "Error fetching response" });
   }
-}
+};
+
+export default handler;
