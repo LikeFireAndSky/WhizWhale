@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import React, { ChangeEvent, useState } from "react";
 
 const InputForm = () => {
@@ -11,23 +12,15 @@ const InputForm = () => {
 
   const handleSubmit = async () => {
     try {
-      const res = await fetch("/api/v1/gpt/generate", {
-        method: "POST",
-        body: JSON.stringify({ userMessage: question }),
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const res = await axios.post("/api/v1/gpt/generate", {
+        question,
       });
 
-      const data = await res.json();
+      console.log(res.data);
+
       if (res.status !== 200) {
         throw new Error(`Request failed with status ${res.status}`);
       }
-
-      setResult(data.result);
-      setQuestion("");
-      console.log(question);
-      console.log(result);
     } catch (err) {
       console.error(err);
       alert(err);

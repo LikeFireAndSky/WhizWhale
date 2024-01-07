@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-  apiKey: "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",
+  apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
 });
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== "POST")
@@ -16,17 +16,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       model: "gpt-3.5-turbo",
       messages: [
         { role: "system", content: "You are a helpful assistant." },
-        { role: "user", content: userMessage || "Hello, GPT!" },
+        { role: "user", content: "안녕" || "Hello, GPT!" },
       ],
       temperature: 0.5,
       max_tokens: 1024,
       top_p: 1,
     });
 
-    res.json({ response: response.choices[0].message.content });
+    return res.status(200).json({ data: response.choices[0].message.content });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Error fetching response" });
+    return res.status(500).json({ error: "Error fetching response" });
   }
 };
 
