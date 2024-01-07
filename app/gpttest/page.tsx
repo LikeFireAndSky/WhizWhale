@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 
 const InputForm = () => {
   const [question, setQuestion] = useState("");
@@ -10,7 +10,7 @@ const InputForm = () => {
     setQuestion(e.target.value);
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const res = await axios.post("/api/v1/gpt/generate", {
