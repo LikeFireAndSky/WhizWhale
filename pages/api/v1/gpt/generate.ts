@@ -16,10 +16,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       model: "gpt-3.5-turbo",
       messages: [
         { role: "system", content: "You are a helpful assistant." },
-        { role: "user", content: "안녕" || "Hello, GPT!" },
+        { role: "user", content: userMessage || "Hello, GPT!" },
       ],
       temperature: 0.5,
-      max_tokens: 1024,
+      max_tokens: 64,
       top_p: 1,
     });
 
