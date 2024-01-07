@@ -1,10 +1,10 @@
-"use client";
-import axios from "axios";
-import React, { ChangeEvent, useState } from "react";
+'use client';
+import axios from 'axios';
+import React, { ChangeEvent, useState } from 'react';
 
 const InputForm = () => {
-  const [question, setQuestion] = useState("");
-  const [result, setResult] = useState("");
+  const [question, setQuestion] = useState('');
+  const [result, setResult] = useState('');
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     setQuestion(e.target.value);
@@ -13,13 +13,13 @@ const InputForm = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/v1/gpt/generate", {
+      const res = await axios.post('/api/v1/gpt/generate', {
         question,
       });
 
       console.log(res.data.data);
       setResult(res.data.data);
-      setQuestion("");
+      setQuestion('');
       console.log(result);
 
       if (res.status !== 200) {
