@@ -6,8 +6,8 @@ frontend:
         - npm ci
     build:
       commands:
-        - env | grep -e DYNAMODB_ACCESS_KEY_ID -e DYNAMODB_SECRET_ACCESS_KEY >>
-          .env.production
+        - env | grep -e DYNAMODB_ACCESS_KEY_ID -e DYNAMODB_TABLE_NAME -e
+          DYNAMODB_SECRET_ACCESS_KEY >> .env.production
         - npm run build
   artifacts:
     baseDirectory: .next
