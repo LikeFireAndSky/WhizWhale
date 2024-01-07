@@ -12,11 +12,7 @@ const fetchText = async () => {
 };
 
 const Page = () => {
-	const { data, isLoading, error } = useQuery({
-		queryKey: ['emotion'],
-		queryFn: fetchText,
-	});
-	return <div>HOME</div>;
+	return <div>안녕</div>;
 };
 
 export default Page;
